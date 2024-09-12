@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-screen w-full flex justify-center items-center">
+    <form
+      action=""
+      class="w-96 p-2 h-96 border border-1 flex justify-center items-center"
+    >
+      <div>
+        <input
+          type="text"
+          class="border w-full h-8 border-black rounded-sm mt-2 p-1"
+          placeholder="username"
+          id="username"
+        />
+        <input
+          type="password"
+          class="border w-full h-8 border-black rounded-sm mt-2 p-1"
+          placeholder="password"
+          id="password"
+        />
+        <input
+          type="password"
+          class="border w-full h-8 border-black rounded-sm mt-2 p-1"
+          placeholder="confirm password"
+          id="confirm-password"
+        />
+        <input type="checkbox" name="" id="show-password" />
+        <label for="">Show Password</label>
+        <input
+          type="submit"
+          id="submit"
+          value="Submit"
+          class="w-full bg-blue-600 text-white p-1 mt-2"
+        />
+        <p id="error" class="uppercase text-red-500 text-center mt-5"></p>
+      </div>
+    </form>
+    <script>
+      const btn = document.getElementById("submit");
+      const showBtn = document.querySelector("#show-password");
+      console.log(showBtn.checked);
+
+      showBtn.addEventListener("click", () => {
+        const username = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm-password");
+        if (username.type == "password" && showBtn.checked) {
+          username.type = "text";
+          confirmPassword.type = "text";
+        } else {
+          username.type = "password";
+          confirmPassword.type = "password";
+        }
+      });
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let error = document.getElementById("error");
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+
+        if (username == "" || password == "" || confirmPassword == "") {
+          error.innerHTML = "Please fill all the fields above";
+        } else if (password.length < 8) {
+          error.innerHTML = "Password must be at least 8 characters";
+        } else if (password !== confirmPassword) {
+          error.innerHTML = "password and confirmPassword must match  ";
+        } else {
+          error.innerHTML = "";
+        }
+      });
+    </script>
+  </body>
+</html>
